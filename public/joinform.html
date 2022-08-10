@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snakes and ladders!</title>
+  </head>
+  <body>
+    <center><h1 class="Title">Snakes and ladders!</h1></center>
+    <center><div class="box"></div></center>
+    <p class="JroomLabel">Join Room:</p>
+
+    <form id="User-form" action="room.html">
+      <label class="Username" for="Username">Username:</label>
+      <input
+        class="Usernameinput"
+        type="text"
+        name="username"
+        id="username"
+        required
+        autofocus
+      
+      />
+
+      <input class="JroomCode" type="text" id="room" name="room" required />
+      <button type="submit" class="JBut">Join</button>
+    </form>
+    <a href="index.html">
+      <button class="BBut">Back</button>
+    </a>
+
+    <style>
+      h1.Title {
+        font-size: 4vw;
+        font-weight: bold;
+        margin-top: 10vh;
+        box-sizing: border-box;
+      }
+      label.Username {
+        position: absolute;
+        top: 31.5vh;
+        left: 30vw;
+        font-size: 2vw;
+        margin-top: -15px;
+        box-sizing: border-box;
+      }
+
+      p.JroomLabel {
+        position: absolute;
+        font-size: 2vw;
+        left: 30vw;
+        bottom: 34vh;
+        margin-bottom: -3px;
+      }
+
+      div.box {
+        position: absolute;
+        width: 50vw;
+        height: 50vh;
+        border: 2px solid black;
+        top: 25vh;
+        left: 25vw;
+        box-sizing: border-box;
+      }
+      input.Usernameinput {
+        position: absolute;
+        top: 31.5vh;
+        left: 42vw;
+        height: 2.5vh;
+        width: 25vw;
+        border: 1px solid gray;
+        font-size: large;
+        box-sizing: border-box;
+      }
+      input.JroomCode {
+        position: absolute;
+        width: 6vw;
+        bottom: 34vh;
+        left: 42.5vw;
+        height: 3vh;
+        box-sizing: border-box;
+      }
+
+      button.JBut {
+        position: absolute;
+        font-style: italic;
+        color: gray;
+        font-size: 1vw;
+        height: 3vh;
+        width: 4vw;
+        bottom: 34vh;
+        left: 50vw;
+        box-sizing: border-box;
+      }
+      button.BBut {
+        position: absolute;
+        bottom: 15vh;
+        left: 15vw;
+        height: 5vh;
+        width: 6vw;
+        font-size: 1.5vw;
+        box-sizing: border-box;
+      }
+    </style>
+  </body>
+</html>

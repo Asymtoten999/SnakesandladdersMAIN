@@ -7,53 +7,180 @@
     <title>Snakes and ladders</title>
   </head>
   <body>
-    <h1 class="Title">Room code:</h1>
-    <a href="index.html">
-      <button class="BBut">Back</button>
+    <div class="frame"></div>
+    <div id="main" class="main">
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="box" id="box"></div>
+      <div class="playerRed" id="red"></div>
+      <div class="playerBlue" id="blue"></div>
+    </div>
+
+    <button class="diceRoll" id="diceRoll">Roll Dice:</button>
+
+    <input readonly id="rollOutput" class="rollOutput" />
+
+    <a href="joinform.html">
+      <button class="BBut" id="BBut">Back</button>
     </a>
-    <a href="game.html">
-      <button class="SBut">Start!</button>
-    </a>
-    <center><div class="box"></div></center>
-    <h2 id="room-name" class="room-name"></h2>
+    <div class="NNWrap">
+      <div class="NumberWrap">
+        <p class="realOutput"></p>
+      </div>
+    </div>
+
+    <form action="game.html">
+      <input
+        readonly
+        type="text"
+        name="room"
+        id="room-name"
+        class="room-name"
+      />
+    </form>
+
     <ul id="users" class="users"></ul>
-    <div class="usersbox"></div>
-    <p class="userlabel">Users:</p>
+    <p class="userlabel">Players:</p>
 
     <style>
-      h1.Title {
+      div.playerRed {
         position: absolute;
-        font-size: 4vw;
-        font-weight: bold;
-        margin-top: 10vh;
-        left: 25vw;
-        box-sizing: border-box;
+        top: 74vh;
+        left: 1vw;
+        height: 4vh;
+        width: 4vh;
+        border-radius: 50%;
+        transition-duration: 0.4s;
+        transition-property: margin;
+        background-color: red;
       }
-      h2.room-name {
+      div.playerBlue {
         position: absolute;
-        font-size: 4vw;
+        top: 74vh;
+        left: 1vw;
+        height: 4vh;
+        width: 4vh;
+        border-radius: 50%;
+        transition-duration: 0.4s;
+        transition-property: margin;
+        background-color: blue;
+      }
+      input.room-name {
+        position: absolute;
+        font-size: 3vw;
         font-weight: bold;
-        margin-top: 10vh;
-        left: 47vw;
-        box-sizing: border-box;
+        margin-top: 1vh;
+        left: 36vw;
+        width: 25vw;
       }
       ul.users {
         position: absolute;
-        width: 50vw;
+        width: 20vw;
         height: 50vh;
-        top: 35vh;
-        left: 25vw;
-        list-style: none;
+        top: 15vh;
+        left: 2vw;
+
         font-size: 2vw;
+        border: 0.1vh solid black;
+        text-align: left;
         box-sizing: border-box;
-      }
-      div.box {
-        position: absolute;
-        width: 50vw;
-        height: 50vh;
-        border: 2px solid black;
-        top: 25vh;
-        left: 25vw;
       }
       div.usersbox {
         position: absolute;
@@ -66,9 +193,18 @@
       p.userlabel {
         font-size: 2vw;
         position: absolute;
-        top: 25vh;
-        left: 26.5vw;
+        top: 6vh;
+        left: 2vw;
         font-weight: bold;
+      }
+
+      p.realOutput {
+        position: absolute;
+        top: 10vh;
+        left: 84vw;
+        font-size: 5vh;
+        font-weight: bold;
+        color: black;
       }
       button.BBut {
         position: absolute;
@@ -79,14 +215,46 @@
         font-size: 1.5vw;
         box-sizing: border-box;
       }
-      button.SBut {
+      input.rollOutput {
         position: absolute;
-        bottom: 15vh;
-        right: 15vw;
+        top: 10vh;
+        left: 84vw;
+        font-size: 5vh;
+        font-weight: bold;
+        color: black;
+        width: 5vw;
+      }
+
+      button.diceRoll {
+        position: absolute;
         height: 5vh;
-        width: 6vw;
-        font-size: 1.5vw;
-        box-sizing: border-box;
+        width: 10vw;
+        left: 72vw;
+        top: 10vh;
+        font-size: 3vh;
+        font-weight: bold;
+        border: 0.2vh solid black;
+      }
+
+      div.main {
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 80vh;
+        width: 85vh;
+      }
+      div.box {
+        float: left;
+        height: 7.8vh;
+        width: 7.8vh;
+        border: 0.1vmin solid black;
+        background-color: bisque;
+        line-height: 2vh;
+        text-align: right;
+        font-size: 2vh;
       }
     </style>
     <script
@@ -95,6 +263,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
   </body>

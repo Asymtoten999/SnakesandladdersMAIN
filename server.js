@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Run when client connects
 io.on("connection", (socket) => {
-  console.log(io.of("/").adapter);
+  console.log("A new Ws has connected...");
   socket.on("joinRoom", ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
@@ -30,9 +30,16 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("roll", (rollValue) => {
+    const user = getCurrentUser(socket.id);
+
+    io.to(user.room).emit("data", rollValue);
+  });
+
   // Runs when client disconnects
   socket.on("disconnect", () => {
     const user = userLeave(socket.id);
+    console.log("A Ws has disconnected...");
 
     // Send users and room info
     io.to(user.room).emit("roomUsers", {

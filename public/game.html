@@ -111,9 +111,57 @@
       <div class="box" id="box"></div>
     </div>
 
+    <button class="diceRoll" id="diceRoll">Roll Dice:</button>
+
+    <input readonly id="rollOutput" class="rollOutput" />
+
+    <a href="index.html">
+      <button class="BBut" id="BBut">Back</button>
+    </a>
+    <div class="NNWrap">
+      <div class="NumberWrap">
+        <p class="realOutput"></p>
+      </div>
+    </div>
+
     <style>
-    
-      
+      p.realOutput {
+        position: absolute;
+        top: 10vh;
+        left: 84vw;
+        font-size: 5vh;
+        font-weight: bold;
+        color: black;
+      }
+      button.BBut {
+        position: absolute;
+        bottom: 15vh;
+        left: 15vw;
+        height: 5vh;
+        width: 6vw;
+        font-size: 1.5vw;
+        box-sizing: border-box;
+      }
+      input.rollOutput {
+        position: absolute;
+        top: 10vh;
+        left: 84vw;
+        font-size: 5vh;
+        font-weight: bold;
+        color: white;
+      }
+
+      button.diceRoll {
+        position: absolute;
+        height: 5vh;
+        width: 10vw;
+        left: 72vw;
+        top: 10vh;
+        font-size: 3vh;
+        font-weight: bold;
+        border: 0.2vh solid black;
+      }
+
       div.main {
         position: absolute;
         margin: auto;
@@ -135,7 +183,14 @@
         font-size: 2vh;
       }
     </style>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
+      integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/game.js"></script>
   </body>
 </html>

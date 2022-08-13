@@ -113,7 +113,7 @@
       <div class="playerBlue" id="blue"></div>
     </div>
 
-    <button class="diceRoll" id="diceRoll">Roll Dice:</button>
+    <button class="diceRoll" id="diceRoll">Roll Dice</button>
 
     <input readonly id="rollOutput" class="rollOutput" />
 
@@ -138,14 +138,22 @@
 
     <ul id="users" class="users"></ul>
     <p class="userlabel">Players:</p>
+    <p class="turn" id="activeToken"></p>
 
     <style>
+      p.turn {
+        font-size: 2vw;
+        position: absolute;
+        top: 25vh;
+        left: 85vw;
+        font-weight: bold;
+      }
       div.playerRed {
         position: absolute;
-        top: 74vh;
-        left: 1vw;
-        height: 4vh;
-        width: 4vh;
+        top: 75vh;
+        left: 0.25vw;
+        height: 3.5vh;
+        width: 3.5vh;
         border-radius: 50%;
         transition-duration: 0.4s;
         transition-property: margin;
@@ -153,10 +161,10 @@
       }
       div.playerBlue {
         position: absolute;
-        top: 74vh;
-        left: 1vw;
-        height: 4vh;
-        width: 4vh;
+        top: 75vh;
+        left: 2.2vw;
+        height: 3.5vh;
+        width: 3.5vh;
         border-radius: 50%;
         transition-duration: 0.4s;
         transition-property: margin;
@@ -214,6 +222,7 @@
         width: 6vw;
         font-size: 1.5vw;
         box-sizing: border-box;
+        cursor: pointer;
       }
       input.rollOutput {
         position: absolute;
@@ -234,6 +243,7 @@
         font-size: 3vh;
         font-weight: bold;
         border: 0.2vh solid black;
+        cursor: pointer;
       }
 
       div.main {

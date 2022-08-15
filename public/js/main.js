@@ -25,7 +25,13 @@ socket.on("moveData", (moveData, direction, turn) => {
     } else if (direction == "left") {
       document.getElementById(`${turn}`).style.marginLeft = moveData;
     }
+
     await new Promise((resolve) => setTimeout(resolve, 400));
+    if (turn == "Blue") {
+      document.getElementById("activeToken").innerHTML = "Red's turn";
+    } else if (turn == "Red") {
+      document.getElementById("activeToken").innerHTML = "Blue's turn";
+    }
     resolve();
   });
 });

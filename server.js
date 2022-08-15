@@ -8,6 +8,7 @@ const {
   userLeave,
   getRoomUsers,
 } = require("./utils/users.js");
+const { dir } = require("console");
 
 const app = express();
 const server = http.createServer(app);
@@ -33,7 +34,27 @@ io.on("connection", (socket) => {
   socket.on("roll", (rollValue) => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit("data", rollValue);
+    socket.to(user.room).emit("rollData", rollValue);
+  });
+
+  socket.on("turnValue", (turn) => {
+    const user = getCurrentUser(socket.id);
+
+    socket.to(user.room).emit("turnData", turn);
+  });
+
+  socket.on("move", (moveValue, direction, turn) => {
+    const user = getCurrentUser(socket.id);
+
+    socket.to(user.room).emit("moveData", moveValue, direction, turn);
+    console.log(moveValue, direction, turn);
+  });
+
+  socket.on("directionValue", (direction) => {
+    const user = getCurrentUser(socket.id);
+
+    socket.to(user.room).emit("directionData", direction);
+    console.log(direction);
   });
 
   // Runs when client disconnects

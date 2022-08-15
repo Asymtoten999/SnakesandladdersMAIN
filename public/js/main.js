@@ -1,15 +1,33 @@
-let turn = "red";
-document.getElementById("red").style.marginLeft = "0vh";
-document.getElementById("red").style.marginTop = "0vh";
-document.getElementById("blue").style.marginLeft = "0vh";
-document.getElementById("blue").style.marginTop = "0vh";
+let turn = "Blue";
+document.getElementById("activeToken").innerHTML = "Blue's turn";
+document.getElementById("Red").style.marginLeft = "0vh";
+document.getElementById("Red").style.marginTop = "0vh";
+document.getElementById("Blue").style.marginLeft = "0vh";
+document.getElementById("Blue").style.marginTop = "0vh";
 let diceRoll = document.getElementById("diceRoll");
 let stopEvent = false;
 
 const socket = io();
 let rollValue;
-socket.on("data", (data) => {
-  document.getElementById("rollOutput").value = data;
+
+socket.on("rollData", (rollData) => {
+  document.getElementById("rollOutput").value = rollData;
+});
+
+socket.on("moveData", (moveData, direction, turn) => {
+  console.log(moveData);
+
+  return new Promise(async (resolve, reject) => {
+    if (direction == "up") {
+      document.getElementById(`${turn}`).style.marginTop = moveData;
+    } else if (direction == "right") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    } else if (direction == "left") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    resolve();
+  });
 });
 
 diceRoll.addEventListener("click", async (e) => {
@@ -19,18 +37,20 @@ diceRoll.addEventListener("click", async (e) => {
     await new Promise((resolve) => setTimeout(resolve, 400));
     await run(rollValue);
     await new Promise((resolve) => setTimeout(resolve, 400));
+    changeTurn();
     stopEvent = false;
   }
 });
 
 function changeTurn() {
-  if (turn == "blue") {
-    document.getElementById("activeToken").innerHTML = "Reds turn";
-    turn = "red";
-  } else if (turn == "red") {
-    document.getElementById("activeToken").innerHTML = "Blues turn";
-    turn = "blue";
+  if (turn == "Blue") {
+    document.getElementById("activeToken").innerHTML = "Red's turn";
+    turn = "Red";
+  } else if (turn == "Red") {
+    document.getElementById("activeToken").innerHTML = "Blue's turn";
+    turn = "Blue";
   }
+  socket.emit("turnValue", turn);
 }
 
 function run(rollValue) {
@@ -42,21 +62,23 @@ function run(rollValue) {
     resolve();
   });
 }
+let moveValue;
 
 function move(direction) {
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
-      document.getElementById(`${turn}`).style.marginTop =
+      moveValue = document.getElementById(`${turn}`).style.marginTop =
         String(marginTop() - 8) + "vh";
     } else if (direction == "right") {
-      document.getElementById(`${turn}`).style.marginLeft =
+      moveValue = document.getElementById(`${turn}`).style.marginLeft =
         String(marginLeft() + 8) + "vh";
     } else if (direction == "left") {
-      document.getElementById(`${turn}`).style.marginLeft =
+      moveValue = document.getElementById(`${turn}`).style.marginLeft =
         String(marginLeft() - 8) + "vh";
     }
     await new Promise((resolve) => setTimeout(resolve, 400));
     resolve();
+    socket.emit("move", moveValue, direction, turn);
   });
 }
 
@@ -72,6 +94,7 @@ function getDirection() {
   } else {
     direction = "left";
   }
+  socket.emit("directionValue", direction);
   return direction;
 }
 
@@ -90,7 +113,7 @@ function marginTop() {
 function roll() {
   return new Promise(async (resolve, reject) => {
     rollValue = Math.floor(Math.random() * 6) + 1;
-    document.getElementById("rollOutput").value.onclick = rollValue;
+    document.getElementById("rollOutput").value = rollValue;
 
     socket.emit("roll", rollValue);
     resolve(rollValue);

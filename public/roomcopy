@@ -18,3 +18,32 @@ socket.on("moveData", (moveData, direction, turn) => {
     resolve();
   });
 });
+
+socket.on("moveData", (moveData, direction, turn) => {
+  turn = "Red";
+  return new Promise(async (resolve, reject) => {
+    if (direction == "up") {
+      document.getElementById(`${turn}`).style.marginTop = moveData;
+    } else if (direction == "right") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    } else if (direction == "left") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    if (turn == "Blue") {
+      document.getElementById("activeToken").innerHTML = "Red's turn";
+    } else if (turn == "Red") {
+      document.getElementById("activeToken").innerHTML = "Blue's turn";
+    }
+    resolve();
+  });
+});
+
+socket.off("orderData", (orderData) => {
+  document.getElementById("Red").style.backgroundColor = "Blue";
+  document.getElementById("Blue").style.backgroundColor = "Red";
+  document.getElementById("Red").style.left = "2.2vw";
+  document.getElementById("Blue").style.left = "0.25vw";
+  console.log(orderData);
+});

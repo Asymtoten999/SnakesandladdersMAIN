@@ -14,9 +14,13 @@ let rollValue;
 socket.on("rollData", (rollData) => {
   document.getElementById("rollOutput").value = rollData;
 });
+socket.on("buttonData", (buttonData) => {
+  document.getElementById("diceRoll").disabled = false;
+});
 
 socket.on("moveData", (moveData, direction, turn) => {
   turn = "Red";
+
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
       document.getElementById(`${turn}`).style.marginTop = moveData;
@@ -39,22 +43,27 @@ socket.on("moveData", (moveData, direction, turn) => {
 diceRoll.addEventListener("click", async (e) => {
   if ((clicked = true) && !stopEvent) {
     stopEvent = true;
+
     let rollValue = await roll();
     await new Promise((resolve) => setTimeout(resolve, 400));
     await run(rollValue);
     await new Promise((resolve) => setTimeout(resolve, 400));
     changeTurn();
+
+    document.getElementById("diceRoll").disabled = true;
+    let buttonValue;
+    socket.emit("buttonToggle", buttonValue);
     stopEvent = false;
   }
 });
 
 function changeTurn() {
-  if (turnInfo == "Blue") {
+  if (turn == "Blue") {
     document.getElementById("activeToken").innerHTML = "Your turn";
-    turnInfo = "Blue";
-  } else if (turnInfo == "Red") {
+    turn = "Blue";
+  } else if (turn == "Red") {
     document.getElementById("activeToken").innerHTML = "Your opponents turn";
-    turnInfo = "Blue";
+    turn = "Blue";
   }
 }
 
@@ -84,6 +93,7 @@ function move(direction) {
     await new Promise((resolve) => setTimeout(resolve, 400));
     resolve();
     socket.emit("move", moveValue, direction, turn);
+    socket.emit("order", moveValue);
   });
 }
 

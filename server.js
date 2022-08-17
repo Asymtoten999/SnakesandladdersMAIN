@@ -47,14 +47,19 @@ io.on("connection", (socket) => {
     const user = getCurrentUser(socket.id);
 
     socket.to(user.room).emit("moveData", moveValue, direction, turn);
-    console.log(moveValue, direction, turn);
   });
 
-  socket.on("directionValue", (direction) => {
+  
+  socket.on("order",(moveValue) => {
     const user = getCurrentUser(socket.id);
 
-    socket.to(user.room).emit("directionData", direction);
-    console.log(direction);
+    socket.to(user.room).emit("orderData", moveValue);
+  });
+
+  socket.on("buttonToggle",(buttonValue) => {
+    const user = getCurrentUser(socket.id);
+
+    socket.to(user.room).emit("buttonData", buttonValue);
   });
 
   // Runs when client disconnects

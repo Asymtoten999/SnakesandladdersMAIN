@@ -1,26 +1,20 @@
-socket.on("turnData", (turnData) => {
-  console.log(turnData);
-  socket.on("moveData", (moveData) => {
-    socket.on("directionData", (direction) => {
-      if (turnData == "Blue") {
-        document.getElementById("activeToken").innerHTML = "Red's turn";
-        turnData = "Red";
-      } else if (turn == "Red") {
-        document.getElementById("activeToken").innerHTML = "Blue's turn";
-        turnData = "Blue";
-      }
+socket.on("moveData", (moveData, direction, turn) => {
+  console.log(turn);
+  return new Promise(async (resolve, reject) => {
+    if (direction == "up") {
+      document.getElementById(`${turn}`).style.marginTop = moveData;
+    } else if (direction == "right") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    } else if (direction == "left") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    }
 
-      return new Promise(async (resolve, reject) => {
-        if (direction == "up") {
-          document.getElementById(`${turnData}`).style.marginTop = moveData;
-        } else if (direction == "right") {
-          document.getElementById(`${turnData}`).style.marginLeft = moveData;
-        } else if (direction == "left") {
-          document.getElementById(`${turnData}`).style.marginLeft = moveData;
-        }
-        await new Promise((resolve) => setTimeout(resolve, 400));
-        resolve();
-      });
-    });
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    if (turn == "Blue") {
+      document.getElementById("activeToken").innerHTML = "Red's turn";
+    } else if (turn == "Red") {
+      document.getElementById("activeToken").innerHTML = "Blue's turn";
+    }
+    resolve();
   });
 });

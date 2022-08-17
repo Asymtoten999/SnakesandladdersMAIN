@@ -1,5 +1,6 @@
 let turn = "Blue";
-document.getElementById("activeToken").innerHTML = "Blue's turn";
+
+document.getElementById("activeToken").innerHTML = "Your turn";
 document.getElementById("Red").style.marginLeft = "0vh";
 document.getElementById("Red").style.marginTop = "0vh";
 document.getElementById("Blue").style.marginLeft = "0vh";
@@ -15,8 +16,7 @@ socket.on("rollData", (rollData) => {
 });
 
 socket.on("moveData", (moveData, direction, turn) => {
-  console.log(moveData);
-
+  turn = "Red";
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
       document.getElementById(`${turn}`).style.marginTop = moveData;
@@ -49,14 +49,13 @@ diceRoll.addEventListener("click", async (e) => {
 });
 
 function changeTurn() {
-  if (turn == "Blue") {
-    document.getElementById("activeToken").innerHTML = "Red's turn";
-    turn = "Red";
-  } else if (turn == "Red") {
-    document.getElementById("activeToken").innerHTML = "Blue's turn";
-    turn = "Blue";
+  if (turnInfo == "Blue") {
+    document.getElementById("activeToken").innerHTML = "Your turn";
+    turnInfo = "Blue";
+  } else if (turnInfo == "Red") {
+    document.getElementById("activeToken").innerHTML = "Your opponents turn";
+    turnInfo = "Blue";
   }
-  socket.emit("turnValue", turn);
 }
 
 function run(rollValue) {
@@ -100,7 +99,7 @@ function getDirection() {
   } else {
     direction = "left";
   }
-  socket.emit("directionValue", direction);
+
   return direction;
 }
 

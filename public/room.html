@@ -139,8 +139,46 @@
     <ul id="users" class="users"></ul>
     <p class="userlabel">Players:</p>
     <p class="turn" id="activeToken"></p>
-
+    <div class="youInfo"></div>
+    <div class="opponentInfo"></div>
+    <p class="youInfoText">You</p>
+    <p class="opponentInfoText">Your Opponent</p>
     <style>
+      p.opponentInfoText {
+        position: absolute;
+        top: 32vh;
+        left: 75vw;
+        font-size: 3vh;
+      }
+      p.youInfoText {
+        position: absolute;
+        top: 25vh;
+        left: 75vw;
+        font-size: 3vh;
+      }
+      div.opponentInfo {
+        position: absolute;
+        top: 35vh;
+        left: 72vw;
+        height: 3.5vh;
+        width: 3.5vh;
+        border-radius: 50%;
+        transition-duration: 0.4s;
+        transition-property: margin;
+        background-color: red;
+      }
+      div.youInfo {
+        position: absolute;
+        top: 28vh;
+        left: 72vw;
+        height: 3.5vh;
+        width: 3.5vh;
+        border-radius: 50%;
+        transition-duration: 0.4s;
+        transition-property: margin;
+        background-color: blue;
+      }
+
       p.turn {
         font-size: 2vw;
         position: absolute;

@@ -47,3 +47,56 @@ socket.off("orderData", (orderData) => {
   document.getElementById("Blue").style.left = "0.25vw";
   console.log(orderData);
 });
+
+<div class="playerRed" id="Red"></div>
+
+
+
+socket.on("SnLData", (froms, tos, turn) => {
+  return new Promise(async (resolve, reject) => {
+    for (let i = 0; i < tos.length; i++) {
+      if (marginLeft() == froms[i][0] && marginTop() == froms[i][1]) {
+        document.getElementById(`${turn}`).style.marginLeft = `${tos[i][0]}vh`;
+        document.getElementById(`${turn}`).style.marginTop = `${tos[i][1]}vh`;
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        break;
+      }
+    }
+
+    resolve();
+  });
+  function marginLeft() {
+    return Number(
+      document.getElementById(`${turn}`).style.marginLeft.split("v")[0]
+    );
+  }
+
+  function marginTop() {
+    return Number(
+      document.getElementById(`${turn}`).style.marginTop.split("v")[0]
+    );
+  }
+});
+
+
+
+
+socket.on("moveData", (moveData, direction, turn) => {
+  turn = "Red";
+  
+
+  return new Promise(async (resolve, reject) => {
+    if (direction == "up") {
+      document.getElementById(`${turn}`).style.marginTop = moveData;
+    } else if (direction == "right") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    } else if (direction == "left") {
+      document.getElementById(`${turn}`).style.marginLeft = moveData;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
+
+    resolve();
+  });
+  
+});

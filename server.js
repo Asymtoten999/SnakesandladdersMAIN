@@ -18,6 +18,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Run when client connects
 io.on("connection", (socket) => {
+ 
+
   console.log("A new Ws has connected...");
   socket.on("joinRoom", ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
@@ -61,6 +63,13 @@ io.on("connection", (socket) => {
 
     socket.to(user.room).emit("buttonData", buttonValue);
   });
+
+  socket.on("SnL",(froms, tos, turn,newLeft,newTop) => {
+    const user = getCurrentUser(socket.id);
+
+    socket.to(user.room).emit("SnLData", froms, tos, turn, newLeft, newTop);
+  });
+
 
   // Runs when client disconnects
   socket.on("disconnect", () => {

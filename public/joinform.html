@@ -28,13 +28,15 @@
     <a href="index.html">
       <button class="BBut">Back</button>
     </a>
+    <div class="background"></div>
 
     <style>
       h1.Title {
         font-size: 4vw;
         font-weight: bold;
         margin-top: 10vh;
-        box-sizing: border-box;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       label.Username {
         position: absolute;
@@ -43,6 +45,7 @@
         font-size: 2vw;
         margin-top: -15px;
         box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
 
       p.JroomLabel {
@@ -51,6 +54,7 @@
         left: 30vw;
         bottom: 34vh;
         margin-bottom: -3px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
 
       div.box {
@@ -61,6 +65,7 @@
         top: 25vh;
         left: 25vw;
         box-sizing: border-box;
+        border-radius: 5vh;
       }
       input.Usernameinput {
         position: absolute;
@@ -69,8 +74,9 @@
         height: 2.5vh;
         width: 25vw;
         border: 1px solid gray;
-        font-size: large;
+        font-size: 1.5vh;
         box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       input.JroomCode {
         position: absolute;
@@ -79,12 +85,15 @@
         left: 42.5vw;
         height: 3vh;
         box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-radius: 1vh;
       }
 
       button.JBut {
         position: absolute;
-        font-style: italic;
-        color: gray;
+
+        color: black;
+        background-color: rgb(189, 234, 189);
         font-size: 1vw;
         height: 3vh;
         width: 4vw;
@@ -92,6 +101,8 @@
         left: 50vw;
         box-sizing: border-box;
         cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-radius: 5vh;
       }
       button.BBut {
         position: absolute;
@@ -102,6 +113,17 @@
         font-size: 1.5vw;
         box-sizing: border-box;
         cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-radius: 5vh;
+      }
+      div.background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -100;
+        background-color: aliceblue;
       }
     </style>
   </body>

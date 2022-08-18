@@ -1,6 +1,6 @@
 let turn = "Blue";
 
-document.getElementById("activeToken").innerHTML = "Your turn";
+document.getElementById("activeToken").innerHTML = "Your turn!";
 document.getElementById("Red").style.marginLeft = "0vh";
 document.getElementById("Red").style.marginTop = "0vh";
 document.getElementById("Blue").style.marginLeft = "0vh";
@@ -16,6 +16,10 @@ socket.on("rollData", (rollData) => {
 });
 socket.on("buttonData", (buttonData) => {
   document.getElementById("diceRoll").disabled = false;
+  document.getElementById("diceRoll").style.backgroundColor =
+    "rgb(239, 235, 143)";
+  document.getElementById("activeToken").innerHTML = "Your turn!";
+  document.getElementById("activeToken").style.color = "blue";
 });
 
 socket.on("moveData", (moveData, direction, turn) => {
@@ -31,13 +35,21 @@ socket.on("moveData", (moveData, direction, turn) => {
     }
 
     await new Promise((resolve) => setTimeout(resolve, 400));
-    if (turn == "Blue") {
-      document.getElementById("activeToken").innerHTML = "Red's turn";
-    } else if (turn == "Red") {
-      document.getElementById("activeToken").innerHTML = "Blue's turn";
-    }
+
     resolve();
   });
+});
+
+socket.on("SnLData", (froms, tos, turn, newLeft, newTop) => {
+  let newNewLeft;
+  let newNewTop;
+
+  if (newLeft == null) {
+  } else {
+    console.log(newLeft, newTop);
+    document.getElementById("Red").style.marginLeft = newLeft;
+    document.getElementById("Red").style.marginTop = newTop;
+  }
 });
 
 diceRoll.addEventListener("click", async (e) => {
@@ -51,6 +63,12 @@ diceRoll.addEventListener("click", async (e) => {
     changeTurn();
 
     document.getElementById("diceRoll").disabled = true;
+    if ((document.getElementById("diceRoll").disabled = true)) {
+      document.getElementById("diceRoll").style.backgroundColor = "lightgrey";
+      document.getElementById("activeToken").innerHTML = "Your opponents turn!";
+      document.getElementById("activeToken").style.color = "red";
+    }
+
     let buttonValue;
     socket.emit("buttonToggle", buttonValue);
     stopEvent = false;
@@ -59,10 +77,8 @@ diceRoll.addEventListener("click", async (e) => {
 
 function changeTurn() {
   if (turn == "Blue") {
-    document.getElementById("activeToken").innerHTML = "Your turn";
     turn = "Blue";
   } else if (turn == "Red") {
-    document.getElementById("activeToken").innerHTML = "Your opponents turn";
     turn = "Blue";
   }
 }
@@ -73,9 +89,61 @@ function run(rollValue) {
       let direction = getDirection();
       await move(direction);
     }
+    checkLaddersAndSnakes();
+
     resolve();
   });
 }
+let newLeft;
+let newTop;
+function checkLaddersAndSnakes() {
+  return new Promise(async (resolve, reject) => {
+    let froms = [
+      [24, 0],
+      [64, 0],
+      [56, -16],
+      [0, -24],
+      [16, -48],
+      [72, -56],
+      [24, -8],
+      [8, -24],
+      [40, -48],
+      [8, -72],
+      [40, -72],
+      [64, -64],
+    ];
+    let tos = [
+      [48, -8],
+      [72, -24],
+      [24, -64],
+      [8, -40],
+      [0, -64],
+      [72, -72],
+      [48, 0],
+      [16, -8],
+      [16, -32],
+      [16, -56],
+      [40, -56],
+      [40, -16],
+    ];
+    for (let i = 0; i < tos.length; i++) {
+      if (marginLeft() == froms[i][0] && marginTop() == froms[i][1]) {
+        newLeft = document.getElementById(
+          `${turn}`
+        ).style.marginLeft = `${tos[i][0]}vh`;
+        newTop = document.getElementById(
+          `${turn}`
+        ).style.marginTop = `${tos[i][1]}vh`;
+        socket.emit("SnL", froms, tos, turn, newLeft, newTop);
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        break;
+      }
+    }
+
+    resolve();
+  });
+}
+
 let moveValue;
 
 function move(direction) {

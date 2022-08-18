@@ -7,19 +7,21 @@
     <title>Snakes and ladders</title>
   </head>
   <body>
-    <center><h1 class="Title">Snakes and ladders!</h1></center>
+    <center><h1 class="Title" >Snakes and Ladders!</h1></center>
     <div class="box"></div>
    
     </a></center>
     <a href="joinform.html">
       <button class="Joinbut">Play Game!</button>
     </a>
+    <div class="background"></div>
 
     <style>
-      h1.Title {
+      h1.Title  {
         font-size: 4vw;
         font-weight: bold;
         margin-top: 10vh;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         
       }
       div.box {
@@ -29,6 +31,8 @@
         border: 2px solid black;
         top: 25vh;
         left: 25vw;
+        border-radius: 5vh;
+
       }
       button.Joinbut {
         position: absolute;
@@ -38,6 +42,18 @@
         width:25vw;
         font-size: 3vw;
         cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-radius: 5vh;
+      }
+      div.background{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -100;
+        background-color: aliceblue;
+        
       }
     </style>
   </body>

@@ -1,15 +1,39 @@
 let turn = "Blue";
 
-document.getElementById("activeToken").innerHTML = "Your turn!";
+document.getElementById("activeToken").innerHTML = "Your opponents turn!";
 document.getElementById("Red").style.marginLeft = "0vh";
 document.getElementById("Red").style.marginTop = "0vh";
 document.getElementById("Blue").style.marginLeft = "0vh";
 document.getElementById("Blue").style.marginTop = "0vh";
 let diceRoll = document.getElementById("diceRoll");
+let startBut = document.getElementById("startBut");
+
 let stopEvent = false;
+let playerNum = 0;
 
 const socket = io();
 let rollValue;
+
+// Get your player number
+socket.on("player-number", (num) => {
+  console.log(num);
+  if (num === -1) {
+    document.getElementById("startBut").style.display = "none";
+    document.getElementById("lecSelect").style.display = "none";
+  } else {
+    document.getElementById("foreground").style.display = "none";
+
+    playerNum = parseInt(num);
+    if (playerNum === 1) {
+      document.getElementById("startBut").style.display = "none";
+      document.getElementById("lecSelect").style.display = "none";
+      console.log(playerNum);
+    }
+  }
+  console.log(num);
+});
+
+socket.on("startData", (startData) => {});
 
 socket.on("rollData", (rollData) => {
   document.getElementById("rollOutput").value = rollData;
@@ -52,6 +76,18 @@ socket.on("SnLData", (froms, tos, turn, newLeft, newTop) => {
   }
 });
 
+let start;
+startBut.addEventListener("click", function () {
+  socket.emit("startMes", start);
+  startBut.style.display = "none";
+  document.getElementById("lecSelect").style.display = "none";
+  document.getElementById("diceRoll").disabled = false;
+  document.getElementById("diceRoll").style.backgroundColor =
+    "rgb(239, 235, 143)";
+  document.getElementById("activeToken").innerHTML = "Your turn!";
+  document.getElementById("activeToken").style.color = "blue";
+});
+
 diceRoll.addEventListener("click", async (e) => {
   if ((clicked = true) && !stopEvent) {
     stopEvent = true;
@@ -89,11 +125,28 @@ function run(rollValue) {
       let direction = getDirection();
       await move(direction);
     }
-    checkLaddersAndSnakes();
 
+    checkLaddersAndSnakes();
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    vociCheck();
     resolve();
   });
 }
+
+function vociCheck() {
+  document.getElementById("voci").style.display = "inherit";
+  document.getElementById("ans1").style.display = "inherit";
+  document.getElementById("ans2").style.display = "inherit";
+  document.getElementById("ans3").style.display = "inherit";
+
+  function genWord() {
+    var qWord = ["French 1", "French 2", "French 3", "French 4", "French 5"];
+    document.getElementById("voci").innerHTML =
+      qWord[Math.floor(Math.random() * qWord.length)];
+  }
+  genWord();
+}
+
 let newLeft;
 let newTop;
 function checkLaddersAndSnakes() {
@@ -237,7 +290,6 @@ socket.on("roomUsers", ({ room, users }) => {
   outputRoomName(room);
   outputUsers(users);
 });
-
 // Add room name to DOM
 function outputRoomName(room) {
   roomName.value = room;

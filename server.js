@@ -97,6 +97,156 @@ io.on("connection", (socket) => {
       socket.to(user.room).emit("startData", start);
     });
 
+    socket.on(
+      "vociCheck1",
+      (
+        direction,
+        qWord,
+        ansBut,
+        aWord,
+        qWordValue,
+        aWordValue,
+        ansButValue,
+        aWordValue1,
+        aWordValue2,
+        ansButValue2
+      ) => {
+        console.log("GOT IT");
+        const user = getCurrentUser(socket.id);
+
+        socket
+          .to(user.room)
+          .emit(
+            "vociData1",
+            direction,
+            qWord,
+            ansBut,
+            aWord,
+            qWordValue,
+            aWordValue,
+            ansButValue,
+            aWordValue1,
+            aWordValue2,
+            ansButValue2
+          );
+      }
+    );
+    socket.on("1.1", (ansButValue) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.1Data", ansButValue);
+    });
+    socket.on("1.1Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.1MarginData", moveBonus);
+    });
+
+    socket.on("1.2", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.2Data", moveBonus);
+    });
+    socket.on("1.2Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.2MarginData", moveBonus);
+    });
+
+    socket.on("1.3", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.3Data", moveBonus);
+    });
+    socket.on("1.3Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("1.3MarginData", moveBonus);
+    });
+
+    socket.on("2.1", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.1Data", moveBonus);
+    });
+    socket.on("2.1Margin", (moveBonus) => {
+      console.log(moveBonus);
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.1MarginData", moveBonus);
+    });
+
+    socket.on("2.2", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.2Data", moveBonus);
+    });
+    socket.on("2.2Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.2MarginData", moveBonus);
+    });
+
+    socket.on("2.3", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.3Data", moveBonus);
+    });
+    socket.on("2.3Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("2.3MarginData", moveBonus);
+    });
+
+    socket.on("3.1", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.1Data", moveBonus);
+    });
+    socket.on("3.1Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.1MarginData", moveBonus);
+    });
+
+    socket.on("3.2", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.2Data", moveBonus);
+    });
+    socket.on("3.2Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.2MarginData", moveBonus);
+    });
+
+    socket.on("3.3", (moveBonus) => {
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.3Data", moveBonus);
+    });
+    socket.on("3.3Margin", (moveBonus) => {
+      console.log(moveBonus);
+
+      const user = getCurrentUser(socket.id);
+
+      socket.to(user.room).emit("3.3MarginData", moveBonus);
+    });
+
     // Runs when client disconnects
     socket.on("disconnect", () => {
       const user = userLeave(socket.id);

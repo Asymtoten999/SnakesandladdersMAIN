@@ -173,8 +173,19 @@
     <button class="ans1" id="ans1"></button>
     <button class="ans2" id="ans2"></button>
     <button class="ans3" id="ans3"></button>
+    <p class="grade" id="grade"></p>
 
     <style>
+      p.grade {
+        font-size: 8vh;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: absolute;
+        left: 42.5vw;
+        top: 23vh;
+        display: inherit;
+        z-index: 700;
+        text-align: center;
+      }
       button.ans1 {
         position: absolute;
         border-radius: 1vh;
@@ -185,6 +196,9 @@
         z-index: 600;
         background-color: lightskyblue;
         display: none;
+        font-size: 2vh;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        cursor: pointer;
       }
       button.ans2 {
         position: absolute;
@@ -196,7 +210,9 @@
         z-index: 600;
         background-color: lightskyblue;
         display: none;
-
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 2vh;
+        cursor: pointer;
       }
       button.ans3 {
         position: absolute;
@@ -208,7 +224,9 @@
         z-index: 600;
         background-color: lightskyblue;
         display: none;
-
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 2vh;
+        cursor: pointer;
       }
       div.voci {
         border: 1px solid black;

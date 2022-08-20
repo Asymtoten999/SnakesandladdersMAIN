@@ -225,3 +225,43 @@ socket.on("disconnect", () => {
     users: getRoomUsers(user.room),
   });
 });
+
+
+
+socket.on("1.1Data", (ansButValue) => {
+  document.getElementById("ans1").style.backgroundColor = "green";
+  document.getElementById("ans2").style.backgroundColor = "red";
+  document.getElementById("ans3").style.backgroundColor = "red";
+  document.getElementById("grade").style.color = "green";
+    document.getElementById("grade").style.display = "inherit";
+    document.getElementById("grade").innerHTML = "Correct!";
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    document.getElementById("voci").style.display = "none";
+    document.getElementById("ans1").style.display = "none";
+    document.getElementById("ans2").style.display = "none";
+    document.getElementById("ans3").style.display = "none";
+    document.getElementById("grade").style.display = "none";
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(document.getElementById("Blue").style.marginLeft);
+    return new Promise(async (resolve, reject) => {
+      if (direction == "up") {
+        moveValue = document.getElementById("Blue").style.marginTop =
+          String(marginTop() + 8) + "vh";
+      } else if (direction == "right") {
+        moveValue = document.getElementById("Blue").style.marginLeft =
+          String(marginLeft() - 8) + "vh";
+      } else if (direction == "left") {
+        moveValue = document.getElementById("Blue").style.marginLeft =
+          String(marginLeft() + 8) + "vh";
+      }
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      resolve();
+    });
+});
+
+
+
+
+
+document.getElementById("Red").style.marginTop =
+              String(marginTop() - 8) + "vh";

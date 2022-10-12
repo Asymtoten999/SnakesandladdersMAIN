@@ -3,10 +3,10 @@ let turn = "Blue";
 var select = document.getElementById("lecSelect");
 
 document.getElementById("activeToken").innerHTML = "Your opponents turn!";
-document.getElementById("Red").style.marginLeft = "0vh";
-document.getElementById("Red").style.marginTop = "0vh";
-document.getElementById("Blue").style.marginLeft = "0vh";
-document.getElementById("Blue").style.marginTop = "0vh";
+document.getElementById("Red").style.marginLeft = "16vh";
+document.getElementById("Red").style.marginTop = "-72vh";
+document.getElementById("Blue").style.marginLeft = "16vh";
+document.getElementById("Blue").style.marginTop = "-72vh";
 let diceRoll = document.getElementById("diceRoll");
 let startBut = document.getElementById("startBut");
 let restartBut = document.getElementById("restartBut");

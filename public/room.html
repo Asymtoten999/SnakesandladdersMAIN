@@ -165,22 +165,90 @@
 
     <select class="lecSelect" name="lecSelect" id="lecSelect">
       <option value="L1.U1">L1.U1</option>
-      <option value="L1.U1">L1.U2</option>
+      <option value="L1.U2">L1.U2</option>
+      <option value="L1.U3">L1.U3</option>
+      <option value="L1.U4">L1.U4</option>
+      <option value="L1.U5">L1.U5</option>
+      <option value="L1.U6">L1.U6</option>
+      <option value="L1.U7">L1.U7</option>
+      <option value="L1.U8">L1.U8</option>
+      <option value="L2.U1">L2.U1</option>
+      <option value="L2.U2">L2.U2</option>
+      <option value="L2.U3">L2.U3</option>
+      <option value="L2.U4">L2.U4</option>
+      <option value="L2.U5">L2.U5</option>
+      <option value="L2.U6">L2.U6</option>
+      <option value="L2.U7">L2.U7</option>
+      <option value="L2.U8">L2.U8</option>
+      <option value="L3.U1">L3.U1</option>
+      <option value="L3.U2">L3.U2</option>
+      <option value="L3.U3">L3.U3</option>
+      <option value="L3.U4">L3.U4</option>
+      <option value="L3.U5">L3.U5</option>
+      <option value="L3.U6">L3.U6</option>
+      <option value="L3.U7">L3.U7</option>
+      <option value="L3.U8">L3.U8</option>
     </select>
     <button class="startBut" id="startBut">Start!</button>
     <div class="foreground" id="foreground">The room is full!</div>
+    <div class="winner" id="winner">YOU WIN!!!</div>
+    <div class="loser" id="loser">YOU LOSE!!!</div>
     <div class="voci" id="voci"></div>
     <button class="ans1" id="ans1"></button>
     <button class="ans2" id="ans2"></button>
     <button class="ans3" id="ans3"></button>
     <p class="grade" id="grade"></p>
+    <button class="restartBut" id="restartBut">Restart!</button>
 
     <style>
+      div.winner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 600;
+        background-color: rgb(83, 148, 83);
+        color: white;
+        text-align: center;
+        font-size: 6vh;
+        line-height: 70vh;
+        display: none;
+      }
+      div.loser {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 600;
+        background-color: rgb(180, 77, 97);
+        color: white;
+        text-align: center;
+        font-size: 6vh;
+        line-height: 70vh;
+        display: none;
+      }
+      button.restartBut {
+        position: absolute;
+        border-radius: 1vh;
+        left: 40vw;
+        top: 46vh;
+        height: 7vh;
+        width: 20vw;
+        z-index: 600;
+        background-color: blueviolet;
+        display: none;
+        color: white;
+        font-size: 4vh;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        cursor: pointer;
+      }
       p.grade {
         font-size: 8vh;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         position: absolute;
-        left: 42.5vw;
+        left: 41.5vw;
         top: 23vh;
         display: inherit;
         z-index: 700;
@@ -189,43 +257,43 @@
       button.ans1 {
         position: absolute;
         border-radius: 1vh;
-        left: 31vw;
+        left: 29vw;
         top: 55vh;
         height: 7vh;
-        width: 8vw;
-        z-index: 600;
+        width: 11vw;
+        z-index: 599;
         background-color: lightskyblue;
         display: none;
-        font-size: 2vh;
+        font-size: 1.5vh;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         cursor: pointer;
       }
       button.ans2 {
         position: absolute;
         border-radius: 1vh;
-        left: 46vw;
+        left: 44.5vw;
         top: 55vh;
         height: 7vh;
-        width: 8vw;
-        z-index: 600;
+        width: 11vw;
+        z-index: 599;
         background-color: lightskyblue;
         display: none;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 2vh;
+        font-size: 1.5vh;
         cursor: pointer;
       }
       button.ans3 {
         position: absolute;
         border-radius: 1vh;
-        left: 61vw;
+        left: 60vw;
         top: 55vh;
         height: 7vh;
-        width: 8vw;
-        z-index: 600;
+        width: 11vw;
+        z-index: 599;
         background-color: lightskyblue;
         display: none;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 2vh;
+        font-size: 1.5vh;
         cursor: pointer;
       }
       div.voci {
@@ -243,7 +311,7 @@
         width: 85vh;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         text-align: center;
-        font-size: 4vh;
+        font-size: 3vh;
         line-height: 30vh;
       }
       select.lecSelect {
@@ -277,101 +345,98 @@
 
       img.L1 {
         position: absolute;
-        width: 5vw;
+        width: 10vh;
         height: 60vh;
         top: 8vh;
-        left: 20vw;
+        left: 40vh;
         transform: rotate(-33deg);
       }
       img.L2 {
         position: absolute;
-        width: 3vw;
+        width: 5.5vh;
         height: 26vh;
-        left: 37vw;
+        left: 69vh;
         top: 52vh;
         transform: rotate(20deg);
       }
       img.L3 {
         position: absolute;
-        width: 3vw;
+        width: 5.5vh;
         height: 25vh;
-        left: 20vw;
+        left: 38vh;
         top: 60vh;
         transform: rotate(75deg);
       }
-      img.L4 {
-        position: absolute;
-        width: 2vw;
-      }
+
       img.L5 {
         position: absolute;
-        width: 5vw;
+        width: 10vh;
         height: 23vh;
-        left: 4vw;
+        left: 6vh;
         top: 10vh;
         transform: rotate(-40deg);
       }
       img.L6 {
         position: absolute;
-        width: 3vw;
+        width: 4.5vh;
         height: 20vh;
-        left: 3vw;
+        left: 5vh;
         top: 33vh;
         transform: rotate(30deg);
       }
       img.L7 {
         position: absolute;
-        width: 3vw;
+        width: 5.5vh;
         height: 20vh;
-        left: 38.5vw;
+        left: 72.5vh;
         top: 2vh;
         transform: rotate(2deg);
       }
       img.S1 {
         position: absolute;
-        width: 11vw;
+        width: 20vh;
         height: 10vh;
-        left: 2vw;
+        left: 5vh;
         top: 6vh;
         transform: rotate(60deg);
       }
       img.S2 {
         position: absolute;
-        width: 13vw;
+        width: 23vh;
         height: 10vh;
-        left: 15vw;
+        left: 27vh;
         top: 67vh;
         transform: rotate();
       }
       img.S3 {
         position: absolute;
-        width: 5vw;
+        width: 10vh;
         height: 15vh;
-        left: 20vw;
+        left: 38vh;
         top: 5vh;
         transform: rotate(-20deg);
       }
       img.S4 {
         position: absolute;
-        width: 17vw;
+        width: 31vh;
         height: 20vh;
-        left: 10vw;
+        left: 19vh;
         top: 30vh;
         transform: rotate(-30deg);
       }
       img.S5 {
         position: absolute;
-        width: 5vw;
+        width: 10vh;
         height: 20vh;
-        left: 6vw;
+        left: 10vh;
         top: 50vh;
         transform: rotate(-55deg);
       }
       img.S6 {
         position: absolute;
-        width: 29vw;
+        width: 55vh;
         height: 20vh;
-        left: 15vw;
+        left: 28vh;
         top: 25vh;
         transform: rotate(-55deg);
       }
@@ -491,7 +556,7 @@
         cursor: pointer;
         border-radius: 5vh;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        z-index: 500;
+        z-index: 601;
       }
       input.rollOutput {
         position: absolute;

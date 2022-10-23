@@ -9,6 +9,7 @@ const {
   getRoomUsers,
 } = require("./utils/users.js");
 const { dir } = require("console");
+const { stripVTControlCharacters } = require("util");
 
 const app = express();
 const server = http.createServer(app);
@@ -55,6 +56,11 @@ io.on("connection", (socket) => {
 
     connections[playerIndex] = false;
 
+    socket.on("winner", (winValue) => {
+      const user = getCurrentUser(socket.id);
+      socket.to(user.room).emit("winData", winValue);
+    });
+
     socket.on("roll", (rollValue) => {
       const user = getCurrentUser(socket.id);
 
@@ -91,10 +97,10 @@ io.on("connection", (socket) => {
       socket.to(user.room).emit("SnLData", froms, tos, turn, newLeft, newTop);
     });
 
-    socket.on("startMes", (start) => {
+    socket.on("startMes", (start, value) => {
       const user = getCurrentUser(socket.id);
 
-      socket.to(user.room).emit("startData", start);
+      socket.to(user.room).emit("startData", start, value);
     });
 
     socket.on(
@@ -253,6 +259,7 @@ io.on("connection", (socket) => {
       console.log("A Ws has disconnected...");
       console.log(`Player ${playerIndex} disconnected`);
       connections[playerIndex] = null;
+      io.emit("refreshData", "refresh");
 
       // Send users and room info
       io.to(user.room).emit("roomUsers", {

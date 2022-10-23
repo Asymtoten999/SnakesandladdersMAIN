@@ -1,12 +1,20 @@
 let turn = "Blue";
 
+var select = document.getElementById("lecSelect");
+
 document.getElementById("activeToken").innerHTML = "Your opponents turn!";
-document.getElementById("Red").style.marginLeft = "0vh";
-document.getElementById("Red").style.marginTop = "0vh";
-document.getElementById("Blue").style.marginLeft = "0vh";
-document.getElementById("Blue").style.marginTop = "0vh";
+document.getElementById("Red").style.marginLeft = "16vh";
+document.getElementById("Red").style.marginTop = "-72vh";
+document.getElementById("Blue").style.marginLeft = "16vh";
+document.getElementById("Blue").style.marginTop = "-72vh";
 let diceRoll = document.getElementById("diceRoll");
 let startBut = document.getElementById("startBut");
+let restartBut = document.getElementById("restartBut");
+restartBut.addEventListener("click", async (e) => {
+  if ((clicked = true)) {
+    window.location.reload();
+  }
+});
 
 let stopEvent = false;
 let playerNum = 0;
@@ -33,7 +41,9 @@ socket.on("player-number", (num) => {
   console.log(num);
 });
 
-socket.on("startData", (startData) => {});
+socket.on("startData", (start, value) => {
+  select.options[select.selectedIndex].value = value;
+});
 
 socket.on("rollData", (rollData) => {
   document.getElementById("rollOutput").value = rollData;
@@ -57,6 +67,9 @@ socket.on("moveData", (moveData, direction, turn) => {
     resolve();
   });
 });
+socket.on("winData", (winValue) => {
+  document.getElementById("loser").style.display = "inherit";
+});
 
 socket.on("SnLData", (froms, tos, turn, newLeft, newTop) => {
   let newNewLeft;
@@ -68,6 +81,10 @@ socket.on("SnLData", (froms, tos, turn, newLeft, newTop) => {
     document.getElementById("Red").style.marginLeft = newLeft;
     document.getElementById("Red").style.marginTop = newTop;
   }
+});
+
+socket.on("refreshData", (refresh) => {
+  window.location.reload();
 });
 
 socket.on(
@@ -96,7 +113,6 @@ socket.on(
       );
     }
 
-    console.log("GOT IT");
     document.getElementById("voci").style.display = "inherit";
     document.getElementById("ans1").style.display = "inherit";
     document.getElementById("ans2").style.display = "inherit";
@@ -125,16 +141,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -171,16 +177,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -217,16 +213,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -275,16 +261,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -321,16 +297,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -367,16 +333,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -425,16 +381,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -471,16 +417,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -516,16 +452,6 @@ socket.on(
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            document.getElementById("Red").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            document.getElementById("Red").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            document.getElementById("Red  ").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = "false";
@@ -560,7 +486,9 @@ socket.on(
 
 let start;
 startBut.addEventListener("click", function () {
-  socket.emit("startMes", start);
+  var value = select.options[select.selectedIndex].value;
+
+  socket.emit("startMes", start, value);
   startBut.style.display = "none";
   document.getElementById("lecSelect").style.display = "none";
   document.getElementById("diceRoll").disabled = false;
@@ -573,6 +501,8 @@ startBut.addEventListener("click", function () {
 diceRoll.addEventListener("click", async (e) => {
   if ((clicked = true) && !stopEvent) {
     stopEvent = true;
+    document.getElementById("diceRoll").disabled = true;
+    document.getElementById("diceRoll").style.backgroundColor = "lightgrey";
 
     document.getElementById("ans1").disabled = false;
     document.getElementById("ans2").disabled = false;
@@ -581,16 +511,49 @@ diceRoll.addEventListener("click", async (e) => {
     document.getElementById("ans2").style.backgroundColor = "lightskyblue";
     document.getElementById("ans3").style.backgroundColor = "lightskyblue";
     let rollValue = await roll();
+    let isOutOfRange = checkRange(rollValue);
     await new Promise((resolve) => setTimeout(resolve, 400));
-    await run(rollValue);
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    changeTurn();
+    if (!isOutOfRange) {
+      await run(rollValue);
+      await new Promise((resolve) => setTimeout(resolve, 400));
+    }
+    let wonBy = checkWin();
+    if (wonBy == "none") {
+      changeTurn();
 
-    let buttonValue;
-    socket.emit("buttonToggle", buttonValue);
-    stopEvent = false;
+      let buttonValue;
+      socket.emit("buttonToggle", buttonValue);
+      stopEvent = false;
+    }
   }
 });
+
+function checkWin() {
+  if (marginTop() == -72 && marginLeft() == 0) {
+    document.getElementById("restartBut").style.display = "inherit";
+    document.getElementById("winner").style.display = "inherit";
+    let winValue;
+    socket.emit("winner", winValue);
+
+    return turn;
+  } else {
+    return "none";
+  }
+}
+
+function checkRange(rollValue) {
+  let isOutOfRange = false;
+  if (
+    marginTop() == -72 &&
+    marginLeft() + Number((rollValue * -8).toFixed(1)) < 0
+  ) {
+    isOutOfRange = true;
+    document.getElementById("diceRoll").disabled = false;
+    document.getElementById("diceRoll").style.backgroundColor =
+      "rgb(239, 235, 143)";
+  }
+  return isOutOfRange;
+}
 
 function changeTurn() {
   if (turn == "Blue") {
@@ -608,6 +571,8 @@ function run(rollValue) {
     }
 
     checkLaddersAndSnakes();
+    checkRange();
+    checkWin();
     await new Promise((resolve) => setTimeout(resolve, 800));
     vociCheck();
 
@@ -618,6 +583,19 @@ function run(rollValue) {
 let moveBonus;
 
 function vociCheck() {
+  var value = select.options[select.selectedIndex].value;
+
+  function marginLeft() {
+    return Number(
+      document.getElementById("Blue").style.marginLeft.split("v")[0]
+    );
+  }
+
+  function marginTop() {
+    return Number(
+      document.getElementById("Blue").style.marginTop.split("v")[0]
+    );
+  }
   document.getElementById("voci").style.display = "inherit";
   document.getElementById("ans1").style.display = "inherit";
   document.getElementById("ans2").style.display = "inherit";
@@ -633,10 +611,300 @@ function vociCheck() {
   } else {
     direction = "left";
   }
+  console.log(value);
+  if (value == "L1.U1") {
+    var aWord = [
+      `une entrée`,
+      `et`,
+      `Salut!`,
+      `Ça va`,
+      `bien`,
+      `merci`,
+      `Et toi?`,
+      `super`,
+      `A plus!`,
+      `Bonjour!`,
+      `je m'appelle`,
+      `moi`,
+      `Moi, c'est…`,
+      `Au revoir!`,
+      `oui`,
+      `Bienvenue!`,
+      `en`,
+      `une adresse`,
+      `un film`,
+      `une banane`,
+      `une orange`,
+      `un croissant`,
+      `une guitare`,
+      `un parc`,
+      `une salade`,
+      `un bonbon`,
+      `une famille`,
+      `une tomate`,
+      `un groupe`,
+      `un bus`,
+      `un café`,
+      `un pull`,
+      `un numéro`,
+      `Qu'est-ce que c'est?`,
+      `c'est …`,
+      `un sac`,
+      `de/d'`,
+      `être `,
+      `là`,
+      `Pardon`,
+      `monsieur`,
+      `pour`,
+      `un cours`,
+      `un cours de guitare`,
+      `alors`,
+      `le mercredi`,
+      `il y a`,
+      `avec`,
+      `le samedi`,
+      `cool`,
+      `aussi`,
+      `d'accord!`,
+      `euh ...`,
+      `encore`,
+      `une place`,
+      `Comment?`,
+      `Tu t'appelles comment?`,
+      `C'est bon`,
+      `dix`,
+      `une minute`,
+      `plus tard`,
+      `une maison`,
+      `à la maison`,
+      `avoir`,
+      `un problème`,
+      `Tiens!`,
+      `dans`,
+      `un porte-monnaie/des porte-monnaies`,
+      `un nom`,
+      `l'âge `,
+      `Tu as quel âge?`,
+      `un an`,
+      `J'ai 14 ans`,
+      `un anniversaire`,
+      `septembre`,
+      `le 19 septembre`,
+      `mais`,
+      `bientôt`,
+      `où `,
+      `Tu habites où?`,
+      `J'habite…`,
+      `une rue`,
+      `une boulangerie`,
+      `un portable`,
+      `un numéro de portable`,
+      `une idée`,
+      `madame …`,
+      `mademoiselle …`,
+      `non`,
+      `une question`,
+      `de … à`,
+      `à`,
+      `une histoire`,
+      `Quelle histoire!`,
+      `mon/ma/mes`,
+      `Allô?`,
+      `ton/ta/tes`,
+      `les affaires`,
+      `un rendez-vous`,
+      `un père`,
+      `Quoi?`,
+      `qui`,
+      `C'est qui?`,
+      `avoir rendez-vous avec qn`,
+      `ce sont`,
+      `son/sa/ses`,
+      `pourquoi`,
+      `parfois`,
+      `être dans la lune`,
+      `…, non?`,
+      `un fils`,
+      `toujours`,
+      `un copain/une copine`,
+      `voilà`,
+      `attends …`,
+      `un chien`,
+      `il s'appelle`,
+      `avoir`,
+      `le hip-hop`,
+      `une guitare électrique`,
+      `le rock`,
+      `la musique`,
+      `ensemble`,
+      `sympa`,
+      `une surprise`,
+      `ça `,
+      `une tarte`,
+      `le chocolat`,
+      `une tarte au chocolat`,
+      `une spécialité`,
+      `un prof/une prof`,
+      `une fille`,
+      `un téléphone`,
+      `mars`,
+      `mai`,
+    ];
+    var qWord = [
+      `ein Eingang`,
+      `und`,
+      `Hallo!, Tschüss!`,
+      `Wie geht's?`,
+      `gut`,
+      `danke`,
+      `Und du?`,
+      `super; toll`,
+      `Bis später!`,
+      `Guten Tag!`,
+      `ich heisse`,
+      `ich`,
+      `ich bin`,
+      `Auf Wiedersehen!`,
+      `ja`,
+      `Willkommen!`,
+      `in`,
+      `eine Adresse`,
+      `ein Film`,
+      `eine Banane`,
+      `eine Orange`,
+      `ein Croissant`,
+      `eine Gitarre`,
+      `ein Park`,
+      `ein Salat`,
+      `ein Bonbon`,
+      `eine Familie`,
+      `eine Tomate`,
+      `eine Gruppe; eine Band`,
+      `ein Bus`,
+      `ein Kaffee; ein Café`,
+      `ein Pulli`,
+      `eine Nummer`,
+      `Was ist das?`,
+      `das ist …`,
+      `eine Tasche`,
+      `von`,
+      `sein`,
+      `da; hier`,
+      `Entschuldigung`,
+      `Herr …`,
+      `für`,
+      `ein Kurs; eine Unterrichtsstunde`,
+      `ein Gitarrenkurs`,
+      `also`,
+      `mittwochs`,
+      `es gibt`,
+      `mit`,
+      `samstags`,
+      `cool`,
+      `auch`,
+      `einverstanden; o.k.`,
+      `äh …`,
+      `noch`,
+      `ein Platz`,
+      `Wie?`,
+      `Wie heisst du?`,
+      `Das ist o.k.`,
+      `zehn`,
+      `eine Minute`,
+      `später`,
+      `ein Haus`,
+      `zu Hause; nach Hause`,
+      `haben`,
+      `ein Problem`,
+      `Schau mal!; Na, sowas!`,
+      `in`,
+      `ein Geldbeutel/Geldbeutel`,
+      `ein Name`,
+      `das Alter`,
+      `Wie alt bist du?`,
+      `ein Jahr`,
+      `Ich bin 14 Jahre alt`,
+      `ein Geburtstag`,
+      `September`,
+      `am 19.September`,
+      `aber`,
+      `bald`,
+      `wo`,
+      `Wo wohnst du?`,
+      `Ich wohne …`,
+      `eine Strasse`,
+      `eine Bäckerei`,
+      `ein Handy; ein Mobiltelefon`,
+      `eine Handynummer`,
+      `eine Idee`,
+      `Frau …`,
+      `Anrede Für eine jüngere Frau`,
+      `nein`,
+      `eine Frage`,
+      `von … bis`,
+      `in`,
+      `eine Geschichte`,
+      `Was für eine Geschichte!`,
+      `mein/meine`,
+      `Hallo?`,
+      `dein/deine`,
+      `die Sachen`,
+      `eine Verabredung; ein Treffen`,
+      `ein Vater`,
+      `Was?`,
+      `wer`,
+      `Wer ist das?`,
+      `eine Verabredung mit jdm. haben; sich mit jdm. treffen`,
+      `das sind`,
+      `sein/seine`,
+      `warum`,
+      `manchmal`,
+      `zerstreut sein`,
+      `…, nicht wahr?; … oder?`,
+      `ein Sohn`,
+      `immer`,
+      `ein Freund/eine Freundin`,
+      `da ist; da sind`,
+      `warte …`,
+      `ein Hund`,
+      `er heisst`,
+      `haben`,
+      `der Hip-Hop`,
+      `eine E-Gitarre`,
+      `die Rockmusik`,
+      `die Musik`,
+      `gemeinsam;zusammen`,
+      `nett`,
+      `eine Überraschung`,
+      `das`,
+      `ein Kuchen`,
+      `die Schokolade`,
+      `ein Schokoladenkuchen`,
+      `eine Spezialität; eine Besonderheit`,
+      `ein Lehrer; eine Lehrerin`,
+      `ein Mädchen`,
+      `ein Telefon`,
+      `März`,
+      `Mai`,
+    ];
+  } else {
+    var qWord = [
+      "French L2.1",
+      "French L2.2",
+      "French L2.3",
+      "French L2.4",
+      "French L2.5",
+    ];
+    var aWord = [
+      "German L2.1",
+      "German L2.2",
+      "German L2.3",
+      "German L2.4",
+      "German L2.5",
+    ];
+  }
 
-  var qWord = ["French 1", "French 2", "French 3", "French 4", "French 5"];
   var ansBut = ["box1", "box2", "box3"];
-  var aWord = ["German 1", "German 2", "German 3", "German 4", "German 5"];
 
   qWordValue = qWord[Math.floor(Math.random() * qWord.length)];
   document.getElementById("voci").innerHTML = qWordValue;
@@ -645,7 +913,10 @@ function vociCheck() {
   aWordValue = aWord[vociIndex];
   console.log(aWordValue);
 
+  let ansButValue;
+
   ansButValue = ansBut[Math.floor(Math.random() * ansBut.length)];
+  console.log(ansButValue);
 
   if (ansButValue == "box1") {
     document.getElementById("ans1").innerHTML = aWordValue;
@@ -670,16 +941,8 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
+          moveBonus = 0;
+
           console.log(moveBonus);
           socket.emit("1.1Margin", moveBonus);
 
@@ -727,17 +990,8 @@ function vociCheck() {
         console.log(document.getElementById("Blue").style.marginLeft);
 
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("1.2Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -781,19 +1035,9 @@ function vociCheck() {
         document.getElementById("ans3").style.display = "none";
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log(document.getElementById("Blue").style.marginLeft);
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("1.3Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -869,17 +1113,8 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("2.1Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -924,17 +1159,8 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("2.2Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -980,17 +1206,8 @@ function vociCheck() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(document.getElementById("Blue").style.marginLeft);
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("2.3Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -1067,17 +1284,8 @@ function vociCheck() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(document.getElementById("Blue").style.marginLeft);
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("3.1Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -1122,17 +1330,8 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() + 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("3.2Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -1177,17 +1376,8 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          if (direction == "up") {
-            moveBonus = document.getElementById("Blue").style.marginTop =
-              String(marginTop() - 8) + "vh";
-          } else if (direction == "right") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() + 8) + "vh";
-          } else if (direction == "left") {
-            moveBonus = document.getElementById("Blue").style.marginLeft =
-              String(marginLeft() - 8) + "vh";
-          }
-          console.log(moveBonus);
+          moveBonus = 0;
+
           socket.emit("3.3Margin", moveBonus);
 
           await new Promise((resolve) => setTimeout(resolve, 400));
@@ -1255,6 +1445,7 @@ function vociCheck() {
     aWordValue2,
     ansButValue2
   );
+  ansButValue = null;
 }
 
 let newLeft;

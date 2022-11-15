@@ -3,6 +3,7 @@ let turn = "Blue";
 var select = document.getElementById("lecSelect");
 
 document.getElementById("activeToken").innerHTML = "Your opponents turn!";
+//Set start position
 document.getElementById("Red").style.marginLeft = "0vh";
 document.getElementById("Red").style.marginTop = "0vh";
 document.getElementById("Blue").style.marginLeft = "0vh";
@@ -10,6 +11,7 @@ document.getElementById("Blue").style.marginTop = "0vh";
 let diceRoll = document.getElementById("diceRoll");
 let startBut = document.getElementById("startBut");
 let restartBut = document.getElementById("restartBut");
+//Restart when game ends
 restartBut.addEventListener("click", async (e) => {
   if ((clicked = true)) {
     window.location.reload();
@@ -24,7 +26,6 @@ let rollValue;
 
 // Get your player number
 socket.on("player-number", (num) => {
-  console.log(num);
   if (num === -1) {
     document.getElementById("startBut").style.display = "none";
     document.getElementById("lecSelect").style.display = "none";
@@ -35,30 +36,29 @@ socket.on("player-number", (num) => {
     if (playerNum === 1) {
       document.getElementById("startBut").style.display = "none";
       document.getElementById("lecSelect").style.display = "none";
-      console.log(playerNum);
     }
   }
-  console.log(num);
 });
 
+// Get selected lesson
 socket.on("startData", (start, value) => {
   select.options[select.selectedIndex].value = value;
 });
 
+// Get rolled number
 socket.on("rollData", (rollData) => {
   document.getElementById("rollOutput").value = rollData;
 });
 
+// Get movement infos
 socket.on("moveData", (moveData, direction, turn) => {
-  turn = "Red";
-
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
-      document.getElementById(`${turn}`).style.marginTop = moveData;
+      document.getElementById("Red").style.marginTop = moveData;
     } else if (direction == "right") {
-      document.getElementById(`${turn}`).style.marginLeft = moveData;
+      document.getElementById("Red").style.marginLeft = moveData;
     } else if (direction == "left") {
-      document.getElementById(`${turn}`).style.marginLeft = moveData;
+      document.getElementById("Red").style.marginLeft = moveData;
     }
 
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -66,26 +66,29 @@ socket.on("moveData", (moveData, direction, turn) => {
     resolve();
   });
 });
+// Get winner info
 socket.on("winData", (winValue) => {
   document.getElementById("loser").style.display = "inherit";
 });
 
+// Get snakes and ladders info
 socket.on("SnLData", (froms, tos, turn, newLeft, newTop) => {
   let newNewLeft;
   let newNewTop;
 
   if (newLeft == null) {
   } else {
-    console.log(newLeft, newTop);
     document.getElementById("Red").style.marginLeft = newLeft;
     document.getElementById("Red").style.marginTop = newTop;
   }
 });
 
+// Get data and refresh if someone leaves
 socket.on("refreshData", (refresh) => {
   window.location.reload();
 });
 
+// Get voci info
 socket.on(
   "vociData1",
   (
@@ -518,8 +521,6 @@ diceRoll.addEventListener("click", async (e) => {
     }
     let wonBy = checkWin();
     if (wonBy == "none") {
-      changeTurn();
-
       let buttonValue;
       socket.emit("buttonToggle", buttonValue);
       stopEvent = false;
@@ -540,6 +541,7 @@ function checkWin() {
   }
 }
 
+// Check if won
 function checkRange(rollValue) {
   let isOutOfRange = false;
   if (
@@ -554,14 +556,7 @@ function checkRange(rollValue) {
   return isOutOfRange;
 }
 
-function changeTurn() {
-  if (turn == "Blue") {
-    turn = "Blue";
-  } else if (turn == "Red") {
-    turn = "Blue";
-  }
-}
-
+// Run every function
 function run(rollValue) {
   return new Promise(async (resolve, reject) => {
     for (i = 1; i <= rollValue; i++) {
@@ -581,20 +576,9 @@ function run(rollValue) {
 
 let moveBonus;
 
+// Voci questioning function
 function vociCheck() {
   var value = select.options[select.selectedIndex].value;
-
-  function marginLeft() {
-    return Number(
-      document.getElementById("Blue").style.marginLeft.split("v")[0]
-    );
-  }
-
-  function marginTop() {
-    return Number(
-      document.getElementById("Blue").style.marginTop.split("v")[0]
-    );
-  }
   document.getElementById("voci").style.display = "inherit";
   document.getElementById("ans1").style.display = "inherit";
   document.getElementById("ans2").style.display = "inherit";
@@ -610,7 +594,7 @@ function vociCheck() {
   } else {
     direction = "left";
   }
-  console.log(value);
+  // Vocab for the lessons
   if (value == "L1.U1") {
     var aWord = [
       `une entrée`,
@@ -905,6 +889,7 @@ function vociCheck() {
 
   var ansBut = ["box1", "box2", "box3"];
 
+  // Word and box picking
   qWordValue = qWord[Math.floor(Math.random() * qWord.length)];
   document.getElementById("voci").innerHTML = qWordValue;
   vociIndex = qWord.indexOf(qWordValue);
@@ -1412,6 +1397,8 @@ function vociCheck() {
 
 let newLeft;
 let newTop;
+
+// Check if on a snake or ladder
 function checkLaddersAndSnakes() {
   return new Promise(async (resolve, reject) => {
     let froms = [
@@ -1462,6 +1449,7 @@ function checkLaddersAndSnakes() {
 
 let moveValue;
 
+// Player movement
 function move(direction) {
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
@@ -1481,6 +1469,7 @@ function move(direction) {
   });
 }
 
+// Movement direction
 function getDirection() {
   let direction;
   if (
@@ -1509,6 +1498,7 @@ function marginTop() {
   );
 }
 
+// Dice roll
 function roll() {
   return new Promise(async (resolve, reject) => {
     rollValue = Math.floor(Math.random() * 6) + 1;
@@ -1519,6 +1509,7 @@ function roll() {
   });
 }
 
+// Box numbers in correct order
 function boxNumbers() {
   let boxes = document.querySelectorAll(".box");
   boxes.forEach((box, i) => {
@@ -1545,7 +1536,7 @@ const { username, room } = Qs.parse(location.search, {
 
 boxNumbers();
 
-// Join chatroom
+// Join room
 socket.emit("joinRoom", { username, room });
 
 // Get room and users

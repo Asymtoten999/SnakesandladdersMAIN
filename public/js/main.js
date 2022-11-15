@@ -3,10 +3,10 @@ let turn = "Blue";
 var select = document.getElementById("lecSelect");
 
 document.getElementById("activeToken").innerHTML = "Your opponents turn!";
-document.getElementById("Red").style.marginLeft = "16vh";
-document.getElementById("Red").style.marginTop = "-72vh";
-document.getElementById("Blue").style.marginLeft = "16vh";
-document.getElementById("Blue").style.marginTop = "-72vh";
+document.getElementById("Red").style.marginLeft = "0vh";
+document.getElementById("Red").style.marginTop = "0vh";
+document.getElementById("Blue").style.marginLeft = "0vh";
+document.getElementById("Blue").style.marginTop = "0vh";
 let diceRoll = document.getElementById("diceRoll");
 let startBut = document.getElementById("startBut");
 let restartBut = document.getElementById("restartBut");
@@ -48,7 +48,6 @@ socket.on("startData", (start, value) => {
 socket.on("rollData", (rollData) => {
   document.getElementById("rollOutput").value = rollData;
 });
-socket.on("buttonData", (buttonData) => {});
 
 socket.on("moveData", (moveData, direction, turn) => {
   turn = "Red";
@@ -941,11 +940,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          console.log(moveBonus);
-          socket.emit("1.1Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -990,10 +984,6 @@ function vociCheck() {
         console.log(document.getElementById("Blue").style.marginLeft);
 
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("1.2Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1036,10 +1026,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("1.3Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1113,10 +1099,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("2.1Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1159,10 +1141,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("2.2Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1206,10 +1184,6 @@ function vociCheck() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(document.getElementById("Blue").style.marginLeft);
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("2.3Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1284,10 +1258,6 @@ function vociCheck() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(document.getElementById("Blue").style.marginLeft);
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("3.1Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1330,10 +1300,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("3.2Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;
@@ -1376,10 +1342,6 @@ function vociCheck() {
         document.getElementById("grade").style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return new Promise(async (resolve, reject) => {
-          moveBonus = 0;
-
-          socket.emit("3.3Margin", moveBonus);
-
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
           document.getElementById("ans1").disabled = true;

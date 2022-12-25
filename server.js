@@ -92,6 +92,7 @@ io.on("connection", (socket) => {
     socket.on(
       "vociCheck1",
       (
+        directon,
         qWord,
         ansBut,
         aWord,
@@ -108,6 +109,7 @@ io.on("connection", (socket) => {
           .to(user.room)
           .emit(
             "vociData1",
+            directon,
             qWord,
             ansBut,
             aWord,

@@ -15,7 +15,7 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const connections = [null, null];
+const connections = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
 
 // Run when client connects
 io.on("connection", (socket) => {

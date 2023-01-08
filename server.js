@@ -15,7 +15,29 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const connections = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+const connections = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+];
 
 // Run when client connects
 io.on("connection", (socket) => {
@@ -183,7 +205,7 @@ io.on("connection", (socket) => {
       console.log("A Ws has disconnected...");
       console.log(`Player ${playerIndex} disconnected`);
       connections[playerIndex] = null;
-      io.emit("refreshData", "refresh");
+      io.to(user.room).emit("refreshData", "refresh");
 
       // Send users and room info
       io.to(user.room).emit("roomUsers", {

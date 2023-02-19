@@ -47,7 +47,6 @@ socket.on("player-number", (num) => {
     document.getElementById("lecSelect").style.display = "none";
   } else {
     // Hide foreground element
-    document.getElementById("foreground").style.display = "none";
 
     // Set playerNum to num
     playerNum = parseInt(num);

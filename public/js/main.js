@@ -77,9 +77,7 @@ socket.on("moveData", (moveData, direction, turn) => {
   return new Promise(async (resolve, reject) => {
     if (direction == "up") {
       document.getElementById("Red").style.marginTop = moveData;
-    } else if (direction == "right") {
-      document.getElementById("Red").style.marginLeft = moveData;
-    } else if (direction == "left") {
+    } else if (direction == "right"|| direction == "left") {
       document.getElementById("Red").style.marginLeft = moveData;
     }
 
@@ -137,45 +135,49 @@ socket.on(
       );
     }
 
-    document.getElementById("voci").style.display = "inherit";
-    document.getElementById("ans1").style.display = "inherit";
-    document.getElementById("ans2").style.display = "inherit";
-    document.getElementById("ans3").style.display = "inherit";
-    document.getElementById("voci").innerHTML = qWordValue;
-    document.getElementById("ans1").disabled = true;
-    document.getElementById("ans2").disabled = true;
-    document.getElementById("ans3").disabled = true;
+    voci = document.getElementById("voci");
+    ans1 = document.getElementById("ans1");
+    ans2 = document.getElementById("ans2");
+    ans3 = document.getElementById("ans3");
+    grade= document.getElementById("grade");
+
+
+    voci.style.display = "inherit";
+    ans1.style.display = "inherit";
+    ans2.style.display = "inherit";
+    ans3.style.display = "inherit";
+    voci.innerHTML = qWordValue;
+    ans1.disabled = true;
+    ans2.disabled = true;
+    ans3.disabled = true;
 
     if (ansButValue == "box1") {
-      document.getElementById("ans1").innerHTML = aWordValue;
+      ans1.innerHTML = aWordValue;
       socket.on("1.1Data", async (ansButValue) => {
-        document.getElementById("ans1").style.backgroundColor = "green";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "green";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Correct!";
+        ans1.style.backgroundColor = "green";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "green";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Correct!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        voci.style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
-            "lightskyblue";
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor = "lightskyblue";
+          ans2.style.backgroundColor = "lightskyblue";
+          ans3.style.backgroundColor = "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
             "rgb(239, 235, 143)";
@@ -185,33 +187,30 @@ socket.on(
       });
       socket.on("1.2Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "green";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "green";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        voci.style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
-            "lightskyblue";
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor = "lightskyblue";
+          ans2.style.backgroundColor = "lightskyblue";
+          ans3.style.backgroundColor = "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
             "rgb(239, 235, 143)";
@@ -221,33 +220,30 @@ socket.on(
       });
       socket.on("1.3Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "green";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "green";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        voci.style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
-            "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
-            "lightskyblue";
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor = "lightskyblue";
+          ans2.style.backgroundColor = "lightskyblue";
+          ans3.style.backgroundColor = "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
             "rgb(239, 235, 143)";
@@ -257,44 +253,44 @@ socket.on(
       });
 
       if (ansButValue2 == "box2") {
-        document.getElementById("ans2").innerHTML = aWordValue1;
+        ans2.innerHTML = aWordValue1;
 
-        document.getElementById("ans3").innerHTML = aWordValue2;
+        ans3.innerHTML = aWordValue2;
       } else if (ansButValue2 == "box3") {
-        document.getElementById("ans3").innerHTML = aWordValue1;
+        ans3.innerHTML = aWordValue1;
 
-        document.getElementById("ans2").innerHTML = aWordValue2;
+        ans2.innerHTML = aWordValue2;
       }
     } else if (ansButValue == "box2") {
-      document.getElementById("ans2").innerHTML = aWordValue;
+      ans2.innerHTML = aWordValue;
       socket.on("2.1Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "green";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "green";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -305,32 +301,32 @@ socket.on(
       });
       socket.on("2.2Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "green";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "green";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Correct!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "green";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "green";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Correct!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -341,32 +337,32 @@ socket.on(
       });
       socket.on("2.3Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "green";
-        document.getElementById("ans3").style.backgroundColor = "red";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "green";
+        ans3.style.backgroundColor = "red";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -377,44 +373,44 @@ socket.on(
       });
 
       if (ansButValue2 == "box1") {
-        document.getElementById("ans1").innerHTML = aWordValue1;
+        ans1.innerHTML = aWordValue1;
 
-        document.getElementById("ans3").innerHTML = aWordValue2;
+        ans3.innerHTML = aWordValue2;
       } else if (ansButValue2 == "box3") {
-        document.getElementById("ans3").innerHTML = aWordValue1;
+        ans3.innerHTML = aWordValue1;
 
-        document.getElementById("ans1").innerHTML = aWordValue2;
+        ans1.innerHTML = aWordValue2;
       }
     } else if (ansButValue == "box3") {
-      document.getElementById("ans3").innerHTML = aWordValue;
+      ans3.innerHTML = aWordValue;
       socket.on("3.1Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "green";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "green";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -425,32 +421,32 @@ socket.on(
       });
       socket.on("3.2Data", async (ansButValue) => {
         console.log(moveBonus);
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "green";
-        document.getElementById("grade").style.color = "red";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Wrong!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "green";
+        grade.style.color = "red";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Wrong!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -460,32 +456,32 @@ socket.on(
         });
       });
       socket.on("3.3Data", async (ansButValue) => {
-        document.getElementById("ans1").style.backgroundColor = "red";
-        document.getElementById("ans2").style.backgroundColor = "red";
-        document.getElementById("ans3").style.backgroundColor = "green";
-        document.getElementById("grade").style.color = "green";
-        document.getElementById("grade").style.display = "inherit";
-        document.getElementById("grade").innerHTML = "Correct!";
+        ans1.style.backgroundColor = "red";
+        ans2.style.backgroundColor = "red";
+        ans3.style.backgroundColor = "green";
+        grade.style.color = "green";
+        grade.style.display = "inherit";
+        grade.innerHTML = "Correct!";
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
         document.getElementById("voci").style.display = "none";
-        document.getElementById("ans1").style.display = "none";
-        document.getElementById("ans2").style.display = "none";
-        document.getElementById("ans3").style.display = "none";
-        document.getElementById("grade").style.display = "none";
+        ans1.style.display = "none";
+        ans2.style.display = "none";
+        ans3.style.display = "none";
+        grade.style.display = "none";
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return new Promise(async (resolve, reject) => {
           await new Promise((resolve) => setTimeout(resolve, 400));
           resolve();
-          document.getElementById("ans1").disabled = "false";
-          document.getElementById("ans2").disabled = "false";
-          document.getElementById("ans3").disabled = "false";
-          document.getElementById("ans1").style.backgroundColor =
+          ans1.disabled = "false";
+          ans2.disabled = "false";
+          ans3.disabled = "false";
+          ans1.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans2").style.backgroundColor =
+          ans2.style.backgroundColor =
             "lightskyblue";
-          document.getElementById("ans3").style.backgroundColor =
+          ans3.style.backgroundColor =
             "lightskyblue";
           document.getElementById("diceRoll").disabled = false;
           document.getElementById("diceRoll").style.backgroundColor =
@@ -496,13 +492,13 @@ socket.on(
       });
 
       if (ansButValue2 == "box1") {
-        document.getElementById("ans1").innerHTML = aWordValue1;
+        ans1.innerHTML = aWordValue1;
 
-        document.getElementById("ans2").innerHTML = aWordValue2;
+        ans2.innerHTML = aWordValue2;
       } else if (ansButValue2 == "box2") {
-        document.getElementById("ans2").innerHTML = aWordValue1;
+        ans2.innerHTML = aWordValue1;
 
-        document.getElementById("ans1").innerHTML = aWordValue2;
+        ans1.innerHTML = aWordValue2;
       }
     }
   }
